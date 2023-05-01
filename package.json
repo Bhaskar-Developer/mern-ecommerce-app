@@ -1,0 +1,14 @@
+{
+  "name": "proshop-mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "author": "Bhaskar Chetty",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
