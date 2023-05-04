@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CART_ADD_ITEM } from '../constants/cartConstants'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants'
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${id}`)
@@ -17,5 +17,16 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
   })
 
   // save entire cart to localStorage. We use getState
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const removeFromCart = (id) => (dispatch, getState) => {
+  dispatch({
+    type: CART_REMOVE_ITEM,
+    payload: id
+  })
+
+  // remove item from localstorage as well
+  // At this point the reducer has already updated the cartItems array, we just update the localstorage with this latest cartItems array
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
