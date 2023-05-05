@@ -27,8 +27,7 @@ const CartScreen = () => {
 
   const checkoutHandler = () => {
     // if not logged in then redirect them to the login page
-
-    // If user is logged in then redirect them to the shipping page
+    // After user logs in the login page the user is then redirected to same page that the user was on before login
     navigate('/login?redirect=shipping')
   }
 
