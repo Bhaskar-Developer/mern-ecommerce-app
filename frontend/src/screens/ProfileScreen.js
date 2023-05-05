@@ -32,12 +32,16 @@ const ProfileScreen = () => {
 
   useEffect(() => {
     if(!userInfo) {
+        // if user is not logged in then redirect to login page
         navigate('/login')
     } else {
+        // user is logged in
         if(!user || !user.name || success) {
+            // but user details are not available, then fetch them from backend
             dispatch({ type: USER_UPDATE_PROFILE_RESET })
             dispatch(getUserDetails('profile'))
         } else {
+            // and user details are available, then show the details(name, email) on UI
             setName(user.name)
             setEmail(user.email)
         }
