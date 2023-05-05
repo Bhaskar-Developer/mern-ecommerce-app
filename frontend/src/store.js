@@ -22,11 +22,18 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 
   const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
-  : null  
+  : null
+
+  const shippingAddressFromStorage = localStorage.getItem('shippingaddress')
+  ? JSON.parse(localStorage.getItem('shippingaddress'))
+  : {}  
 
 // This is the initial state whenever application loads
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: { 
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage 
+  },
   userLogin: { userInfo: userInfoFromStorage }  
 }
 
