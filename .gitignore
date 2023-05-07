@@ -11,6 +11,9 @@ node_modules/
 # production
 /build
 
+#Dont push files that were pushed in uploads
+/uploads
+
 # misc
 .DS_Store
 .env
