@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { PayPalButton } from 'react-paypal-button-v2'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails, payOrder } from '../actions/orderActions'
-import { ORDER_PAY_RESET } from '../constants/orderConstants'
+import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
 const OrderScreen = () => {
+  const navigate = useNavigate()  
   const [sdkReady, setSdkReady] = useState(false)  
   const { id } = useParams()  
   const dispatch = useDispatch()  
@@ -20,6 +21,12 @@ const OrderScreen = () => {
 
   const orderPay = useSelector(state => state.orderPay)
   const { loading: loadingPay, success: successPay } = orderPay
+
+  const orderDeliver = useSelector(state => state.orderDeliver)
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100 ).toFixed(2)
@@ -31,6 +38,11 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
+    // redirect to login page if user is not logged in
+    if(!userInfo) {
+        navigate('/login')
+    }
+
     const addPaypalScript = async () => {
         const { data } = await axios.get('/api/config/paypal')
         const script = document.createElement('script')
@@ -44,8 +56,9 @@ const OrderScreen = () => {
     }
     
 
-    if(!order || successPay) {
+    if(!order || successPay || successDeliver) {
         dispatch({ type: ORDER_PAY_RESET })
+        dispatch({ type: ORDER_DELIVER_RESET })
         dispatch(getOrderDetails(id))
     } else if (order && !order.isPaid) {
         if(!window.paypal) {
@@ -56,12 +69,16 @@ const OrderScreen = () => {
             setSdkReady(true)
         }
     }
-  }, [dispatch, id, order, successPay])
+  }, [dispatch, id, order, successPay, successDeliver, userInfo, navigate])
 
   const successPaymentHandler = (paymentResult) => {
     console.log("paymentResult", paymentResult)
     dispatch(payOrder(id, paymentResult))
   }
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  } 
   
   return (
     <>
@@ -162,6 +179,14 @@ const OrderScreen = () => {
                             )}
                         </ListGroup.Item>
                     ) }
+                    { loadingDeliver && <Loader /> }
+                    { userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                        <ListGroup.Item>
+                            <Button type='button' className='btn btn-block' onClick={deliverHandler} >
+                                Mark As Delivered
+                            </Button>
+                        </ListGroup.Item>
+                    )}
                 </Card>
             </Col>
         </Row>
