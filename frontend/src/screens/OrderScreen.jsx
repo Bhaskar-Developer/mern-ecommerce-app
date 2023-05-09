@@ -85,7 +85,7 @@ const OrderScreen = () => {
     <>
     { loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : 
     <>
-        <Link to='/admin/orderlist' className="btn btn-light my-3" >Go Back</Link>
+        <Link to={ userInfo.isAdmin ? '/admin/orderlist': '/profile' } className="btn btn-light my-3" >Go Back</Link>
         <h1>Order {order._id}</h1>
         <Row>
             <Col md={8} >
