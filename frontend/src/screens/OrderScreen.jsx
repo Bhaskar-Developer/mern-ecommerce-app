@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET, ORDER_DETAILS_RESET } from '../constants/orderConstants'
 
 const OrderScreen = () => {
   const navigate = useNavigate()  
@@ -56,7 +56,8 @@ const OrderScreen = () => {
     }
     
 
-    if(!order || successPay || successDeliver) {
+    if(!order || successPay || successDeliver || order._id !== id) {
+        dispatch({ type: ORDER_DETAILS_RESET })
         dispatch({ type: ORDER_PAY_RESET })
         dispatch({ type: ORDER_DELIVER_RESET })
         dispatch(getOrderDetails(id))
@@ -84,6 +85,7 @@ const OrderScreen = () => {
     <>
     { loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : 
     <>
+        <Link to='/admin/orderlist' className="btn btn-light my-3" >Go Back</Link>
         <h1>Order {order._id}</h1>
         <Row>
             <Col md={8} >
