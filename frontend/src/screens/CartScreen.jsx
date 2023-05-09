@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -8,7 +8,7 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 const CartScreen = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   const qty = searchParams.get('qty') ? Number(searchParams.get('qty')) : 1
   const dispatch = useDispatch()
 
@@ -35,7 +35,7 @@ const CartScreen = () => {
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
-        {cartItems.length == 0 ? <Message>Your Cart Is empty <Link to='/'>Go Back</Link></Message> : (
+        {cartItems.length === 0 ? <Message>Your Cart Is empty <Link to='/'>Go Back</Link></Message> : (
           <ListGroup variant='flush'>
             {cartItems.map(item => (
               <ListGroup.Item key={item.product} >

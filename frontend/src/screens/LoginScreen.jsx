@@ -11,7 +11,7 @@ import { login } from '../actions/userActions'
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   const navigate = useNavigate()
 
   const dispatch = useDispatch()

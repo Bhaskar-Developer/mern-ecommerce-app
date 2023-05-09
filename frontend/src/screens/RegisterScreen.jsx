@@ -14,7 +14,7 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   const navigate = useNavigate()
 
   const dispatch = useDispatch()
@@ -22,11 +22,11 @@ const RegisterScreen = () => {
   const userRegister = useSelector(state => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
-  const redirect =  searchParams.get('redirect') ? searchParams.get('redirect') : "/"
+  const redirect =  searchParams.get('redirect') ? searchParams.get('redirect') : ""
 
   useEffect(() => {
     if(userInfo) {
-        navigate(redirect)
+        navigate(`/${redirect}`)
     }
   }, [userInfo, redirect, navigate])
 
