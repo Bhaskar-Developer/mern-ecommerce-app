@@ -20,7 +20,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber || 1))
-  }, [dispatch, keyword, pageNumber])
+  }, [dispatch, keyword, pageNumber]) 
 
   return (
     <>
