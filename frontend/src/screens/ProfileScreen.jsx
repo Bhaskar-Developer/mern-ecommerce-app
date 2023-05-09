@@ -121,7 +121,7 @@ const ProfileScreen = () => {
         </Col>
         <Col md={9}>
             <h2>My Orders</h2>
-            { loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger' >{errorOrders}</Message> : (
+            { loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger' >{errorOrders}</Message> : orders.length === 0 ? <Message>No Orders To Show</Message> : (
                 <Table striped bordered hover responsive className='table-sm' >
                     <thead>
                         <tr>
