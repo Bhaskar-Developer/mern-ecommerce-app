@@ -71,6 +71,7 @@ const UserEditScreen = () => {
                         onChange={(e) => setName(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
+                    <br />
                     <Form.Group controlId='email' >
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control 
@@ -80,6 +81,7 @@ const UserEditScreen = () => {
                         onChange={(e) => setEmail(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
+                    <br />
                     <Form.Group controlId='isAdmin' >
                         <Form.Check 
                         type='checkbox' 
@@ -89,6 +91,8 @@ const UserEditScreen = () => {
                         onChange={(e) => setIsAdmin(e.target.checked)}>
                         </Form.Check>
                     </Form.Group>
+                    <br />
+                    <br />
                     <Button type='submit' variant='primary' >
                         Update
                     </Button>

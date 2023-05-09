@@ -72,6 +72,7 @@ const ProfileScreen = () => {
         {success && <Message variant='success'>Profile Updated</Message> }
         { loading && <Loader /> }
         <Form onSubmit={submitHandler} >
+            <br />
             <Form.Group controlId='name' >
                 <Form.Label>Name</Form.Label>
                 <Form.Control 
@@ -81,6 +82,7 @@ const ProfileScreen = () => {
                 onChange={(e) => setName(e.target.value)}>
                 </Form.Control>
             </Form.Group>
+            <br />
             <Form.Group controlId='email' >
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control 
@@ -90,6 +92,7 @@ const ProfileScreen = () => {
                 onChange={(e) => setEmail(e.target.value)}>
                 </Form.Control>
             </Form.Group>
+            <br />
             <Form.Group controlId='password' >
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
@@ -99,6 +102,7 @@ const ProfileScreen = () => {
                 onChange={(e) => setPassword(e.target.value)}>
                 </Form.Control>
             </Form.Group>
+            <br />
             <Form.Group controlId='confirmPassword' >
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control 
@@ -108,8 +112,10 @@ const ProfileScreen = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}>
                 </Form.Control>
             </Form.Group>
+            <br />
+            <br />
             <Button type='submit' variant='primary' >
-                Update
+                Update Details
             </Button>
         </Form>
         </Col>

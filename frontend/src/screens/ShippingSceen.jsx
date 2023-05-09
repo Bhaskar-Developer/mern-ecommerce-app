@@ -29,6 +29,7 @@ const ShippingSceen = () => {
       <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
+        <br />
         <Form.Group controlId='address'>
           <Form.Label>Address</Form.Label>
           <Form.Control
@@ -39,7 +40,7 @@ const ShippingSceen = () => {
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        <br />
         <Form.Group controlId='city'>
           <Form.Label>City</Form.Label>
           <Form.Control
@@ -50,7 +51,7 @@ const ShippingSceen = () => {
             onChange={(e) => setCity(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        <br />
         <Form.Group controlId='postalCode'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
@@ -61,7 +62,7 @@ const ShippingSceen = () => {
             onChange={(e) => setPostalCode(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        <br />
         <Form.Group controlId='country'>
           <Form.Label>Country</Form.Label>
           <Form.Control
@@ -72,7 +73,8 @@ const ShippingSceen = () => {
             onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        <br />
+        <br />
         <Button type='submit' variant='primary'>
           Continue
         </Button>
